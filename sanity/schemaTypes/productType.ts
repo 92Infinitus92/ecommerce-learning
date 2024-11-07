@@ -70,7 +70,7 @@ export const productType = defineType({
       return {
         title: select.title,
         media: select.media,
-        subtitle: `${select.price}`,
+        subtitle: `$${select.price}`,
       };
     },
   },

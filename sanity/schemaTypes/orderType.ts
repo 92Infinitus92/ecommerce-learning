@@ -88,5 +88,75 @@ export const orderType = defineType({
         }),
       ],
     }),
+    defineField({
+      name: "totalPrice",
+      title: "Total Price",
+      type: "number",
+      validation: (Rule) => Rule.required().min(0),
+    }),
+    defineField({
+      name: "currency",
+      title: "Currency",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "discount",
+      title: "Discount",
+      type: "number",
+      validation: (Rule) => Rule.min(0),
+    }),
+    defineField({
+      name: "status",
+      title: "Order Status",
+      type: "string",
+      options: {
+        list: [
+          {
+            title: "Paid",
+            value: "paid",
+          },
+          {
+            title: "Pending",
+            value: "pending",
+          },
+          {
+            title: "Cancelled",
+            value: "cancelled",
+          },
+          {
+            title: "Shipped",
+            value: "shipped",
+          },
+          {
+            title: "Delivered",
+            value: "delivered",
+          },
+        ],
+      },
+    }),
+    defineField({
+      name: "orderDate",
+      title: "Order Date",
+      type: "datetime",
+      validation: (Rule) => Rule.required(),
+    }),
   ],
+  preview: {
+    select: {
+      name: "customerName",
+      amount: "totalPrice",
+      currency: "currency",
+      orderId: "orderNumber",
+      email: "customerEmail",
+    },
+    prepare(select) {
+      const orderIdSnippet = `#${select.orderId.slice(0, 6)}...${select.orderId.slice(-6)}`;
+      return {
+        title: `${select.name} - ${orderIdSnippet}`,
+        subtitle: `${select.amount} ${select.currency}, ${select.email}`,
+        media: BasketIcon,
+      };
+    },
+  },
 });
