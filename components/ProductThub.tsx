@@ -5,7 +5,6 @@ import Link from "next/link";
 
 function ProductThub({ product }: { product: Product }) {
   const isOutOfStock = product.stock != null && product.stock < 1;
-  console.log(product);
   return (
     <Link
       href={`/products/${product.slug?.current}`}
