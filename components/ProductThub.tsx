@@ -7,7 +7,7 @@ function ProductThub({ product }: { product: Product }) {
   const isOutOfStock = product.stock != null && product.stock < 1;
   return (
     <Link
-      href={`/products/${product.slug?.current}`}
+      href={`/product/${product.slug?.current}`}
       className={`group flex flex-col bg-white rounded-lg border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden dark:bg-gray-800 dark:border-gray-700 ${isOutOfStock ? "opacity-50" : ""}`}
     >
       <div className="relative aspect-square w-full h-full overflow-hidden">
