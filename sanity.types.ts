@@ -357,10 +357,10 @@ export type ALL_PRODUCTS_QUERYResult = Array<{
   stock?: number;
 }>;
 
-// Source: ./sanity/lib/products/getProductBySlug.ts
-// Variable: PRODUCT_BY_SLUG_QUERY
-// Query: *[_type == "product" && slug.current == $slug] | order(name asc)[0]
-export type PRODUCT_BY_SLUG_QUERYResult = {
+// Source: ./sanity/lib/products/getProductsByCategory.ts
+// Variable: PRODUCTS_BY_CATEGORY_QUERY
+// Query: *[_type == "product" && category == $category] | order(name asc)
+export type PRODUCTS_BY_CATEGORY_QUERYResult = Array<{
   _id: string;
   _type: "product";
   _createdAt: string;
@@ -418,7 +418,7 @@ export type PRODUCT_BY_SLUG_QUERYResult = {
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   stock?: number;
-} | null;
+}>;
 
 // Source: ./sanity/lib/products/searchProductsByName.ts
 // Variable: PRODUCT_SEARCH_QUERY
@@ -489,7 +489,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "\n        *[_type == \"category\"] | order(name asc)": ALL_CATEGORIES_QUERYResult;
     "\n    *[\n    _type == \"product\"\n   ] | order(name asc)\n": ALL_PRODUCTS_QUERYResult;
-    "\n        *[_type == \"product\" && slug.current == $slug] | order(name asc)[0]\n    ": PRODUCT_BY_SLUG_QUERYResult;
+    "\n        *[_type == \"product\" && category == $category] | order(name asc)\n    ": PRODUCTS_BY_CATEGORY_QUERYResult;
     "\n    *[_type == \"product\" && name match $searchTerm] | order(name asc)\n  ": PRODUCT_SEARCH_QUERYResult;
   }
 }
