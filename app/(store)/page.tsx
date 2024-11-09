@@ -7,6 +7,8 @@ import Image from "next/image";
 export default async function Home() {
   const products = await getAllProducts();
   const categories = await getAllCategories();
+
+  console.log(products, categories);
   return (
     <div className="">
       <Banner />

@@ -1,3 +1,4 @@
+import ProductsView from "@/components/ProductsView";
 import { getAllCategories } from "@/sanity/lib/products/getAllCategories";
 import { getProductsByCategory } from "@/sanity/lib/products/getProductsByCategory";
 
@@ -5,6 +6,21 @@ async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const products = await getProductsByCategory(slug);
   const categories = await getAllCategories();
-  return <div>CategoryPage</div>;
+  console.log(products, slug);
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-4xl">
+        <h1 className="text-3xl font-bold mb-6 text-center">
+          {slug
+            .split("-")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ")}
+        </h1>
+        {products && (
+          <ProductsView categories={categories} products={products} />
+        )}
+      </div>
+    </div>
+  );
 }
 export default CategoryPage;
